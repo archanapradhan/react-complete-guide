@@ -1,3 +1,5 @@
+This guide was as part of my learing from Maximilian Schwarzmüller course so that i can refer it in future.
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
