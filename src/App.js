@@ -11,7 +11,7 @@ class App extends Component {
       { name: "Rita", age: 54 }
     ],
     otherState: "some other value",
-    showPersons: "false"
+    showPersons: false
   };
 
   switchNameHandler = newName => {
@@ -50,33 +50,39 @@ class App extends Component {
       cursor: "pointer"
     };
 
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+          >
+            My hobbies: Dance
+          </Person>
+          {/* Passing method references between components */}
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind(this, "Bhuvanesh")}
+            changed={this.nameChangedHandler}
+          />
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}
+          />
+        </div>
+      );
+    }
+
     return (
       <div className="App">
-        <h1>HI, I'm a react app</h1>
+        <h1>Hi, I'm a react app</h1>
         <button style={bstyle} onClick={this.togglePersonHandler}>
-          Switch Name
+          Toggle Persons
         </button>
-        {this.state.showPersons === true ? (
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-            >
-              My hobbies: Dance
-            </Person>
-            {/* Passing method references between components */}
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              click={this.switchNameHandler.bind(this, "Bhuvanesh")}
-              changed={this.nameChangedHandler}
-            />
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age}
-            />
-          </div>
-        ) : null}
+        {persons}
       </div>
       /* return React.createElement(
       "div",
