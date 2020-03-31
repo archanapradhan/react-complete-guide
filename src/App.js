@@ -7,21 +7,27 @@ import person from "./Person/Person";
 class App extends Component {
   state = {
     persons: [
-      { name: "Archana", age: 30 },
-      { name: "Susanta", age: 58 },
-      { name: "Rita", age: 54 }
+      { id: "sgdf1", name: "Archana", age: 30 },
+      { id: "sgdf2", name: "Susanta", age: 58 },
+      { id: "sgdf3", name: "Rita", age: 54 }
     ],
     otherState: "some other value",
     showPersons: false
   };
 
-  nameChangedHandler = event => {
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+
+    const person = { ...this.state.persons[personIndex] };
+    const persons = { ...this.state.persons };
+
+    person.name = event.target.value;
+    persons[personIndex] = person;
+
     this.setState({
-      persons: [
-        { name: "Archana", age: 30 },
-        { name: event.target.value, age: 58 },
-        { name: "Rita", age: 54 }
-      ]
+      persons: persons
     });
   };
 
@@ -32,6 +38,7 @@ class App extends Component {
 
   deletePersonHandler = personIndex => {
     //const persons = this.state.persons.slice();
+    //latest js way is to use spread operator
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({ persons: persons });
@@ -58,6 +65,8 @@ class App extends Component {
                 click={() => this.deletePersonHandler(index)}
                 name={person.name}
                 age={person.age}
+                key={person.id}
+                changed={event => this.nameChangedHandler(event, person.id)}
               />
             );
           })}
