@@ -1,9 +1,21 @@
 //import React, { useState } from "react";
 import React, { Component } from "react";
+import styled from "styled-components";
 import "./App.css";
 import Person from "./Person/Person";
-import Radium, { StyleRoot } from "radium";
 
+const StyledButton = styled.button`
+  background-color: teal;
+  color: white;
+  font: inherit;
+  border: 1px solid grey;
+  padding: 8px;
+  cursor: pointer;
+  &:hover: {
+    background-color: teal;
+    color: white;
+  }
+`;
 class App extends Component {
   state = {
     persons: [
@@ -48,17 +60,17 @@ class App extends Component {
 
   render() {
     // inline style
-    const bstyle = {
-      backgroundColor: "beige",
-      font: "inherit",
-      border: "1px solid grey",
-      padding: "8px",
-      cursor: "pointer",
-      ":hover": {
-        backgroundColor: "teal",
-        color: "white"
-      }
-    };
+    // const bstyle = {
+    //   backgroundColor: "beige",
+    //   font: "inherit",
+    //   border: "1px solid grey",
+    //   padding: "8px",
+    //   cursor: "pointer",
+    //   ":hover": {
+    //     backgroundColor: "teal",
+    //     color: "white"
+    //   }
+    // };
 
     let persons = null;
 
@@ -87,24 +99,24 @@ class App extends Component {
           })}
         </div>
       );
-      bstyle.backgroundColor = "pink";
-      bstyle[":hover"] = {
-        backgroundColor: "salmon",
-        color: "white"
-      };
+      // bstyle.backgroundColor = "pink";
+      // bstyle[":hover"] = {
+      //   backgroundColor: "salmon",
+      //   color: "white"
+      // };
     }
     //npm install --save radium - radium pkg allows us to use inline styles with pseudo selectors and media queries
+    //npm install --save styled-components
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>Hi, I'm a react app</h1>
-          <p className={styleClasses.join(" ")}>This is really working.</p>
-          <button style={bstyle} onClick={this.togglePersonHandler}>
-            Toggle Persons
-          </button>
-          {persons}
-        </div>
-      </StyleRoot>
+      <div className="App">
+        <h1>Hi, I'm a react app</h1>
+        <p className={styleClasses.join(" ")}>This is really working.</p>
+        <StyledButton onClick={this.togglePersonHandler}>
+          Toggle Persons
+        </StyledButton>
+        {persons}
+      </div>
+
       /* return React.createElement(
       "div",
       { classname: "app" },
@@ -115,7 +127,7 @@ class App extends Component {
     );
   }
 }
-export default Radium(App);
+export default App;
 
 /*#region stateHooks*/
 // const app = props => {
