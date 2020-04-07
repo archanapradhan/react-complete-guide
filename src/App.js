@@ -5,14 +5,14 @@ import "./App.css";
 import Person from "./Person/Person";
 
 const StyledButton = styled.button`
-  background-color: teal;
+  background-color: ${(props) => (props.alt ? "blue" : "teal")};
   color: white;
   font: inherit;
   border: 1px solid grey;
   padding: 8px;
   cursor: pointer;
-  &:hover: {
-    background-color: teal;
+  &:hover {
+    background-color: ${(props) => (props.alt ? "red" : "salmon")};
     color: white;
   }
 `;
@@ -21,14 +21,14 @@ class App extends Component {
     persons: [
       { id: "sgdf1", name: "Archana", age: 30 },
       { id: "sgdf2", name: "Susanta", age: 58 },
-      { id: "sgdf3", name: "Rita", age: 54 }
+      { id: "sgdf3", name: "Rita", age: 54 },
     ],
     otherState: "some other value",
-    showPersons: false
+    showPersons: false,
   };
 
   nameChangedHandler = (event, id) => {
-    const personIndex = this.state.persons.findIndex(p => {
+    const personIndex = this.state.persons.findIndex((p) => {
       return p.id === id;
     });
 
@@ -41,7 +41,7 @@ class App extends Component {
     persons[personIndex] = person;
 
     this.setState({
-      persons: persons
+      persons: persons,
     });
   };
 
@@ -50,7 +50,7 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   };
 
-  deletePersonHandler = personIndex => {
+  deletePersonHandler = (personIndex) => {
     //const persons = this.state.persons.slice();
     //latest js way is to use spread operator
     const persons = [...this.state.persons];
@@ -93,7 +93,7 @@ class App extends Component {
                 name={person.name}
                 age={person.age}
                 key={person.id}
-                changed={event => this.nameChangedHandler(event, person.id)}
+                changed={(event) => this.nameChangedHandler(event, person.id)}
               />
             );
           })}
@@ -111,7 +111,10 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'm a react app</h1>
         <p className={styleClasses.join(" ")}>This is really working.</p>
-        <StyledButton onClick={this.togglePersonHandler}>
+        <StyledButton
+          alt={this.state.showPersons}
+          onClick={this.togglePersonHandler}
+        >
           Toggle Persons
         </StyledButton>
         {persons}
