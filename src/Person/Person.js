@@ -15,12 +15,18 @@ const StyleDiv = styled.div`
     width: 450px;
   }
 `;
-const person = props => {
+const person = (props) => {
   // const style = {
   //   "@media(min-width:500px)": {
   //     width: "400px"
   //   }
   // };
+
+  //dummy case to raise error for Error Boundary
+  const rnd = Math.random();
+  if (rnd > 0.7) {
+    throw new Error("Something went wrong");
+  }
 
   return (
     // <div className="Person" style={style}>
