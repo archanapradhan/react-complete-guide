@@ -1,6 +1,6 @@
 //import React, { useState } from "react";
 import React, { Component } from "react";
-import "./App.css";
+import appClasses from "./App.css";
 import Person from "./Person/Person";
 import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
 
@@ -47,20 +47,8 @@ class App extends Component {
   };
 
   render() {
-    // inline style
-    // const bstyle = {
-    //   backgroundColor: "beige",
-    //   font: "inherit",
-    //   border: "1px solid grey",
-    //   padding: "8px",
-    //   cursor: "pointer",
-    //   ":hover": {
-    //     backgroundColor: "teal",
-    //     color: "white"
-    //   }
-    // };
-
     let persons = null;
+    let btnClass = [appClasses.Button];
 
     //let styleClasses = ["bold", "mutedRose"].join(" ");
     const styleClasses = [];
@@ -88,6 +76,8 @@ class App extends Component {
           })}
         </div>
       );
+
+      btnClass.push(appClasses.Red);
       // bstyle.backgroundColor = "pink";
       // bstyle[":hover"] = {
       //   backgroundColor: "salmon",
@@ -97,10 +87,13 @@ class App extends Component {
     //npm install --save radium - radium pkg allows us to use inline styles with pseudo selectors and media queries
     //npm install --save styled-components
     return (
-      <div className="App">
+      <div className={appClasses.App}>
         <h1>Hi, I'm a react app</h1>
         <p className={styleClasses.join(" ")}>This is really working.</p>
-        <button className="button" onClick={this.togglePersonHandler}>
+        <button
+          className={btnClass.join(" ")}
+          onClick={this.togglePersonHandler}
+        >
           Toggle Persons
         </button>
         {persons}
