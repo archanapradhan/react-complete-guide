@@ -48,7 +48,7 @@ class App extends Component {
 
   render() {
     let persons = null;
-    let btnClass = [appClasses.Button];
+    let btnClass = "";
 
     //let styleClasses = ["bold", "mutedRose"].join(" ");
     const styleClasses = [];
@@ -77,7 +77,7 @@ class App extends Component {
         </div>
       );
 
-      btnClass.push(appClasses.Red);
+      btnClass = appClasses.Red;
       // bstyle.backgroundColor = "pink";
       // bstyle[":hover"] = {
       //   backgroundColor: "salmon",
@@ -90,10 +90,7 @@ class App extends Component {
       <div className={appClasses.App}>
         <h1>Hi, I'm a react app</h1>
         <p className={styleClasses.join(" ")}>This is really working.</p>
-        <button
-          className={btnClass.join(" ")}
-          onClick={this.togglePersonHandler}
-        >
+        <button className={btnClass} onClick={this.togglePersonHandler}>
           Toggle Persons
         </button>
         {persons}
