@@ -46,6 +46,20 @@ class App extends Component {
     this.setState({ persons: persons });
   };
 
+  componentDidMount() {
+    console.log("[App.js] componentDidMount");
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[App.js] shouldComponentUpdate");
+    //Powerful enough to enhance the performance as we can control the rendering
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log("[App.js] componentDidUpdate");
+  }
+
   render() {
     let persons = null;
 
