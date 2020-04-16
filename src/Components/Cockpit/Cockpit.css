@@ -1,0 +1,29 @@
+.fuchsia {
+  color: fuchsia;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.Cockpit button {
+  background-color: teal;
+  color: white;
+  font: inherit;
+  border: 1px solid grey;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.Cockpit button:hover {
+  background-color: greenyellow;
+  color: black;
+}
+
+.Cockpit button.Red {
+  background-color: red;
+}
+
+.Cockpit button.Red:hover {
+  background-color: salmon;
+}
