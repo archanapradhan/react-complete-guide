@@ -3,13 +3,26 @@ import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import Person from "./Person/Person";
 
 class Persons extends Component {
+  shouldCompoenentUpdate(nextProps, nextState) {
+    console.log("[Perosns.js] shouldComponentUpdate");
+    //shouldComponentUpdate is very powerful and comes handy to improve performance by controlling rendering elements
+    //As the array objects are reference types their pointers are being compared.
+    //Hence its important to create copies while making changes to reference types. We have already doe this in app.js namechangedHandler
+
+    if (nextProps.persons !== this.props.persons) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   getSnapshotBeforeUpdate() {
-    console.log("[Person.js] getSnapshotBeforeUpdate");
+    console.log("[Persons.js] getSnapshotBeforeUpdate");
     return { message: "Snapshot!" };
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log("[Person,js] componentDidUpdate.");
+    console.log("[Persons.js] componentDidUpdate.");
     console.log(snapshot);
   }
 
@@ -19,7 +32,7 @@ class Persons extends Component {
     );
   }
   render() {
-    console.log("[Person.js] rendering..");
+    console.log("[Persons.js] rendering..");
     return this.props.persons.map((person, index) => {
       return (
         <ErrorBoundary key={person.id}>

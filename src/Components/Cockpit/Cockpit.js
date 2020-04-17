@@ -29,10 +29,10 @@ const cockpit = (props) => {
     btnClass = styles.Red;
   }
 
-  if (props.persons.length >= 2) {
+  if (props.personsLength >= 2) {
     styleClasses.push(styles.fuchsia);
   }
-  if (props.persons.length >= 1) {
+  if (props.personsLength >= 1) {
     styleClasses.push(styles.bold);
   }
 
@@ -47,4 +47,4 @@ const cockpit = (props) => {
   );
 };
 
-export default cockpit;
+export default React.memo(cockpit);
