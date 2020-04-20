@@ -15,7 +15,14 @@ class App extends Component {
     ],
     otherState: "some other value",
     showPersons: false,
+    showCockpit: true,
+    changeCounter: 0,
   };
+
+  getDerivedStateFromProps(props, state) {
+    console.log("[App.js] getDerivedStateFromProps", props);
+    return state;
+  }
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex((p) => {
@@ -30,8 +37,13 @@ class App extends Component {
     person.name = event.target.value;
     persons[personIndex] = person;
 
-    this.setState({
-      persons: persons,
+    //its advisable to send prevState as parameter if the states depend on old value of the state
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        //changeCounter: this.state.changeCounter + 1,
+        changeCounter: prevState.changeCounter + 1,
+      };
     });
   };
 
@@ -63,6 +75,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("[App.js] render");
     let persons = null;
 
     if (this.state.showPersons) {
@@ -79,12 +92,21 @@ class App extends Component {
     return (
       // <WithClass classes={styles.App}>
       <Wrapper>
-        <Cockpit
-          title={this.props.appTitle}
-          showPersons={this.state.showPersons}
-          personsLength={this.state.persons.length}
-          clicked={this.togglePersonHandler}
-        />
+        <button
+          onClick={() => {
+            this.setState({ showCockpit: false });
+          }}
+        >
+          Remove Cockpit
+        </button>
+        {this.state.showCockpit ? (
+          <Cockpit
+            title={this.props.appTitle}
+            showPersons={this.state.showPersons}
+            personsLength={this.state.persons.length}
+            clicked={this.togglePersonHandler}
+          />
+        ) : null}
         {persons}
       </Wrapper>
       // </WithClass>
