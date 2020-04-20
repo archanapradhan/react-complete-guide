@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import styles from "./App.css";
 import Persons from "../Components/Persons/Persons";
 import Cockpit from "../Components/Cockpit/Cockpit";
-
+import WithClass from "../hoc/WithClass";
 class App extends Component {
   state = {
     persons: [
@@ -75,7 +75,7 @@ class App extends Component {
     //npm install --save radium - radium pkg allows us to use inline styles with pseudo selectors and media queries
     //npm install --save styled-components
     return (
-      <div className={styles.App}>
+      <WithClass classes={styles.App}>
         <Cockpit
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
@@ -83,7 +83,7 @@ class App extends Component {
           clicked={this.togglePersonHandler}
         />
         {persons}
-      </div>
+      </WithClass>
 
       /* return React.createElement(
       "div",
