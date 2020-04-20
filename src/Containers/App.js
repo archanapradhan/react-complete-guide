@@ -3,7 +3,9 @@ import React, { Component } from "react";
 import styles from "./App.css";
 import Persons from "../Components/Persons/Persons";
 import Cockpit from "../Components/Cockpit/Cockpit";
-import WithClass from "../hoc/WithClass";
+import withClass from "../hoc/withClass";
+import Wrapper from "../hoc/Wrapper";
+
 class App extends Component {
   state = {
     persons: [
@@ -75,7 +77,8 @@ class App extends Component {
     //npm install --save radium - radium pkg allows us to use inline styles with pseudo selectors and media queries
     //npm install --save styled-components
     return (
-      <WithClass classes={styles.App}>
+      // <WithClass classes={styles.App}>
+      <Wrapper>
         <Cockpit
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
@@ -83,7 +86,8 @@ class App extends Component {
           clicked={this.togglePersonHandler}
         />
         {persons}
-      </WithClass>
+      </Wrapper>
+      // </WithClass>
 
       /* return React.createElement(
       "div",
@@ -95,7 +99,7 @@ class App extends Component {
     );
   }
 }
-export default App;
+export default withClass(App, styles.App);
 
 /*#region stateHooks*/
 // const app = props => {
