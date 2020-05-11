@@ -17,6 +17,7 @@ class App extends Component {
     showPersons: false,
     showCockpit: true,
     changeCounter: 0,
+    authenticated: false,
   };
 
   getDerivedStateFromProps(props, state) {
@@ -37,7 +38,7 @@ class App extends Component {
     person.name = event.target.value;
     persons[personIndex] = person;
 
-    //its advisable to send prevState as parameter if the states depend on old value of the state
+    //its a good practice to send prevState as parameter if the states depend on old value of the state
     this.setState((prevState, props) => {
       return {
         persons: persons,
@@ -74,6 +75,10 @@ class App extends Component {
     console.log("[App.js] componentDidUpdate");
   }
 
+  loginHandler = () => {
+    this.setState({ authenticated: true });
+  };
+
   render() {
     console.log("[App.js] render");
     let persons = null;
@@ -84,6 +89,7 @@ class App extends Component {
           persons={this.state.persons}
           clicked={this.deletePersonHandler}
           changed={this.nameChangedHandler}
+          isAuthenticated={this.state.authenticated}
         />
       );
     }
@@ -105,6 +111,7 @@ class App extends Component {
             showPersons={this.state.showPersons}
             personsLength={this.state.persons.length}
             clicked={this.togglePersonHandler}
+            login={this.loginHandler}
           />
         ) : null}
         {persons}

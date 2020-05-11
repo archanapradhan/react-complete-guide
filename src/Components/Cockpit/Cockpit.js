@@ -1,10 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./Cockpit.css";
 
 const cockpit = (props) => {
+  const toggleBtnRef = useRef();
   useEffect(() => {
     console.log("[Cockpit.js] useEffect");
+    toggleBtnRef.current.click();
+
     //Here we can do actions like Http request
+
     setTimeout(() => {
       console.log("Saved data to cloud!");
     }, 1000);
@@ -40,9 +44,10 @@ const cockpit = (props) => {
     <div className={styles.Cockpit}>
       <h1>{props.title}</h1>
       <p className={styleClasses.join(" ")}>This is really working.</p>
-      <button className={btnClass} onClick={props.clicked}>
+      <button ref={toggleBtnRef} className={btnClass} onClick={props.clicked}>
         Toggle Persons
       </button>
+      <button onClick={props.login}>Log in</button>
     </div>
   );
 };
